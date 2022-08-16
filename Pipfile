@@ -9,9 +9,8 @@ colorama = "*"
 flask-cors = "*"
 waitress = "*"
 werkzeug = "*"
-
 pytest = "*"
-
+gunicorn = "*"
 
 [dev-packages]
 
@@ -20,4 +19,3 @@ python_version = "3.10"
 
 [scripts]
 test = "pytest ."
-
