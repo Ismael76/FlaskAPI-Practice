@@ -1,5 +1,7 @@
 import sqlite3
 
+# Creating A Connection To Our DB
+
 
 def get_db_connection():
     conn = sqlite3.connect('cars.db')
@@ -7,6 +9,7 @@ def get_db_connection():
     return conn
 
 
+# Our Vehicles Class Consisting Of Methods To Update Our Vehicles Table In The DB
 class Vehicles():
     def __init__(self, manufacturer, model):
         self.manufacturer = manufacturer

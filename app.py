@@ -16,6 +16,8 @@ CORS(app)
 
 # db = SQLAlchemy(app)
 
+# Function That Creates A Connection To Our DB
+
 
 def get_db_connection():
     conn = sqlite3.connect('cars.db')
@@ -42,14 +44,21 @@ def car_list():
     # }
 
     if request.method == 'GET':
+        # Connecting To DB By Calling The Function That Creates A Connection To DB
         conn = get_db_connection()
+        # Retrieving All Data Using SQL Query, fetchall() Returns All Rows
         allCars = conn.execute('SELECT * FROM vehicles').fetchall()
+        # We Need To Convert Each Row Into A Tuple So It Can Be Iterated Over, We Store This Inside A List
         results = [tuple(row) for row in allCars]
         conn.close()
+        # We Return The Results List In JSON Format
         return jsonify(results)
 
     if request.method == 'POST':
+        # We Use request.get_json() To Get JSON Response In The POST REQUEST
         car_to_add = request.get_json()
+        # car_to_add['manufacturer'] This Will Return The Value In The JSON Body That Has The Key 'manufacturer' etc.
+        # We Call Our Model & Access It's Create Method That Creates A New Entry To Our Vehicles Table In DB.
         new_car = vehicles.Vehicles.create(
             car_to_add['manufacturer'], car_to_add['model'])
         return "Added Car!"
@@ -75,6 +84,6 @@ def error_404(err):
 
 
 if __name__ == '__main__':
-    # app.run(debug=True)
-    serve(app, host='0.0.0.0', port=8080, url_scheme='https')
+    app.run(debug=True)
+    # serve(app, host='0.0.0.0', port=8080, url_scheme='https')
     # Waitress to deploy on heroku!
