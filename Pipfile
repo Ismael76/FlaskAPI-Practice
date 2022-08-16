@@ -10,9 +10,14 @@ flask-cors = "*"
 waitress = "*"
 werkzeug = "*"
 
+pytest = "*"
+
+
 [dev-packages]
 
 [requires]
 python_version = "3.10"
 
 [scripts]
+test = "pytest ."
+
